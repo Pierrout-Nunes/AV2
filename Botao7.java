@@ -132,23 +132,25 @@ public  class Botao extends KeyAdapter {
             //se o tamanho da frase q to digitando ainda é menor
                    //do q a frase de exemplo , faça o q ja escrevi 
                //senão, mude de frase c o setText de texto e caixa e o-- for--
-            // Esse if serve para me retornar o i-ésimo caractere da string > charAt
+            
              if(caixa.getText().length() < tamanhoDaFrase){
-           if(caixa.getText().charAt(atual)==texto.getText().charAt(atual)){
-            System.out.println("acertou");
-            acertoAtual ++; // o quanto que digitei certo  
-            System.out.println("Você acertou  "+ acertoAtual );
-           
-       }
+                
+                // Esse if serve para me retornar o i-ésimo caractere da string > charAt
+                if(caixa.getText().charAt(atual)==texto.getText().charAt(atual)){
+                    System.out.println("acertou");
+                    acertoAtual ++; // o quanto que digitei certo  
+                    System.out.println("Você acertou  "+ acertoAtual );
 
-           // Se eu errar
-           else if (caixa.getText().charAt(atual)!= texto.getText().charAt(atual)){
-                erroAtual ++;
-                System.out.println("errou "+ erroAtual);
-            //    caixa.setText(caixa.getText().substring(0, atual));
-           }
-atual++;
-             }
+            }
+
+                // Se eu errar
+                else if (caixa.getText().charAt(atual)!= texto.getText().charAt(atual)){
+                        erroAtual ++;
+                        System.out.println("errou "+ erroAtual);
+                    //    caixa.setText(caixa.getText().substring(0, atual));
+                }
+            atual++;
+                  }
              else{
                 texto.setText("ap");//dinamizar aki, trocar "apa"
                 caixa.setText(null);
