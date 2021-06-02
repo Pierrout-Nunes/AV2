@@ -2,8 +2,6 @@ package tecladovirtual;
 
 
 import java.awt.Color;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -11,17 +9,14 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
-//import javax.swing.AbstractAction;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-// implements Keylistener ????? ActionListener
-//implements ActionListener
 public  class Botao extends KeyAdapter {
- //   final static String [] pangrama = {"ap a", "aaa"};// ARRUMAAAAAAR
+   // final static String [] pangrama2 = {"apa", "aaa"};// ARRUMAAAAAAR
    // int tamanhoDaFrase = pangrama.length;// tamanho do pangrama
     String pangrama = "ap a";
+    int tamanhoDaFrase = pangrama.length();
     int atual = 0;// a desgraça da letra atual
     int erroAtual = 0;// a outra coisa q deu errado la
     int acertoAtual = 0;
@@ -46,8 +41,6 @@ public  class Botao extends KeyAdapter {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// fechar quando apertar no X
         frame.setLocationRelativeTo(null);// o JFrame inicializa no meio da tela
         frame.setVisible(true);
-        
-        
         frame.getContentPane().add(painel);// getContentPane() gerencia o layout, permite varias ações ou adiciona componenetes na interface
         //f.pack();// redimensiona tudo de uma vez, é tipo o setSize ou setBounds 
         // esse pack ta sobrepondo o meu f.setsize
@@ -57,14 +50,13 @@ public  class Botao extends KeyAdapter {
     // Molda o teclado
     public void keyboard () {
 
-
         caixa = new JTextArea ();
         texto = new JTextField (pangrama);
+
        // cria evento do botão, acho q isso é inútil
-       bEnter.addKeyListener(this);
-       bA.addKeyListener(this);
-       bP.addKeyListener(this);
-       
+        bEnter.addKeyListener(this);
+        bA.addKeyListener(this);
+        bP.addKeyListener(this);
        
       // configurações da caixa de texto
         caixa.setFont(new Font("Serif", Font.ITALIC, 12));
@@ -82,7 +74,8 @@ public  class Botao extends KeyAdapter {
         
    
         // Responsável pela volta da cor original do botão
-     final Color corOriginal = bEnter.getBackground(); 
+        final Color corOriginal = bEnter.getBackground(); 
+    
     // "Ouvir" os eventos do teclado 
     //aki fica a exceção ?
      caixa.addKeyListener( new KeyAdapter(){
@@ -90,35 +83,34 @@ public  class Botao extends KeyAdapter {
      // Quando pressiona o botão
      public void keyPressed(KeyEvent evt) {
       
-           int keyCode = evt.getKeyCode();
-         switch (keyCode) {
-             case KeyEvent.VK_ENTER:
-                 // caixa.append(texto.getText() + "\n");// printa o texto toda vez q aperta enter
-                 bEnter.doClick();
-                 System.out.println("foi o enter");
-                 System.out.println(" "+ keyCode);
-                 bEnter.setBackground(Color.red);
-                 //Ação gerada pelo ENTER
-                 break;
-             case KeyEvent.VK_A:
-                 //caixa.append(texto.getText()); printa o texto toda vez que for A
-                 bA.doClick();
-                 System.out.println("foi o A");
-                 System.out.println(" "+ keyCode);
-                 break;
-             case KeyEvent.VK_P:
-                 //caixa.append(texto.getText()); printa o texto toda vez que for A
-                 bP.doClick();
-                 System.out.println("foi o P");
-                 System.out.println(" "+ keyCode);
-                 break;
-             default:
-                 break;
-         }
+        int keyCode = evt.getKeyCode();
+        
+            switch (keyCode) {
+                case KeyEvent.VK_ENTER:
+                    // caixa.append(texto.getText() + "\n");// printa o texto toda vez q aperta enter
+                    bEnter.doClick();
+                    System.out.println("foi o enter");
+                    System.out.println(" "+ keyCode);
+                    bEnter.setBackground(Color.red);
+                    //Ação gerada pelo ENTER
+                    break;
+                case KeyEvent.VK_A:
+                    //caixa.append(texto.getText()); printa o texto toda vez que for A
+                    bA.doClick();
+                    System.out.println("foi o A");
+                    System.out.println(" "+ keyCode);
+                    break;
+                case KeyEvent.VK_P:
+                    //caixa.append(texto.getText()); printa o texto toda vez que for A
+                    bP.doClick();
+                    System.out.println("foi o P");
+                    System.out.println(" "+ keyCode);
+                    break;
+                default:
+                    break;
+            }
       
         }
-     
-    
      
      // Quando deixa de pressionar o botão
      @Override
@@ -128,12 +120,20 @@ public  class Botao extends KeyAdapter {
             if ( keyCode == KeyEvent.VK_ENTER) { 
                 bEnter.setBackground(corOriginal);
             }
-       /*     for(int i = 0; i < tamanhoDaFrase; i++ ){
+       /*     for(int i = 0; i < 3; i++ ){
                    pangrama(atual) = caixa.getText().charAt(atual);
+            atual = 0;
+            caixa.setText(null);
+            texto.setText()
             } 
 */
        try{
+          // for(int i = 0; i < 3; i++)//rodar 3 pang
+            //se o tamanho da frase q to digitando ainda é menor
+                   //do q a frase de exemplo , faça o q ja escrevi 
+               //senão, mude de frase c o setText de texto e caixa e o-- for--
             // Esse if serve para me retornar o i-ésimo caractere da string > charAt
+             if(caixa.getText().length() < tamanhoDaFrase){
            if(caixa.getText().charAt(atual)==texto.getText().charAt(atual)){
             System.out.println("acertou");
             acertoAtual ++; // o quanto que digitei certo  
@@ -148,22 +148,23 @@ public  class Botao extends KeyAdapter {
             //    caixa.setText(caixa.getText().substring(0, atual));
            }
 atual++;
+             }
+             else{
+                texto.setText("ap");//dinamizar aki, trocar "apa"
+                caixa.setText(null);
+                atual = 0; 
+             }
        }
+      
        catch(Exception um){
            System.out.println("estourou o tamaho da string");
-           texto.setText("apa");//dinamizar aki, trocar "apa"
-	   caixa.setText(null);
-	   atual = 0;
        }
+
         // comparação dos textos, tanto da caixa de entrada quanto do textField usado de exemplo
-        //pensar onde te coloco
+        
          if(texto.getText().equals(caixa.getText()))  {
                System.out.println("aparece caso tudo certo" ); 
-               // se tudo deu certo, próximo pangrama****
-              /*texto.setText("apa");//dinamizar aki, trocar "apa"
-	      caixa.setText(null);
-	      atual = 0;*/
-         
+   
      }
     }
 
